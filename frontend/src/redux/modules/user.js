@@ -58,7 +58,30 @@ function facebookLogin(access_token) {
       .catch(err => console.log(err));
     }
   }
-  
+
+  function createAccount(username, password, email, name){
+    return function(dispatch){
+      fetch("/rest-auth/registration/ ", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          username,
+          password1: password,
+          password2: password,
+          email,
+          name
+        })
+      })
+      .then(response => response.json())
+      .then(json => {
+        if(json.token){
+          dispatch(saveToken(json.token))
+        }
+      })
+    }
+  } 
   // initial state
   
   const initialState = {
@@ -92,7 +115,8 @@ function facebookLogin(access_token) {
   
   const actionCreators = {
     facebookLogin,
-    usernameLogin
+    usernameLogin,
+    createAccount
   };
   
   export { actionCreators };
