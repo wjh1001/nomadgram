@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from nomadgram.users import models as user_models
 from taggit.managers import TaggableManager
+from django.contrib.humanize.templatetags.humanize import naturaltime
 
 @python_2_unicode_compatible
 class TimeStampedModel(models.Model):
@@ -37,7 +38,12 @@ class Image(TimeStampedModel):
 
     @property
     def comment_count(self):
-        return self.comments.all().count() 
+        return self.comments.all().count()
+
+    @property
+    def natural_time(self):
+        return naturaltime(self.created_at)
+
 
 
 @python_2_unicode_compatible
