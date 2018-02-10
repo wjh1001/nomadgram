@@ -8,6 +8,7 @@ class Container extends Component {
   render() {
     return <CommentBox 
     {...this.state}
+    {...this.props}
     handleInputChange={this._handleInputChange} 
      handleKeyPress={this._handleKeyPress}/>;
   }

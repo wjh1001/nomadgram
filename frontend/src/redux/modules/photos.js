@@ -91,6 +91,27 @@ function unlikePhoto(photoId){
         });
     }
 }
+
+
+function commentPhoto(photoId, message){
+    return (dispatch, getState) => {
+        const {user : {token}} = getState();
+        fetch(`/images/{photoId}/comments/`, {
+            method: "POST",
+            headers: {
+                Authorization: `JTW ${token}`
+            },
+            body: JSON.stringify({
+                message
+            })
+        }).then(response => {
+            if(response.status === 401){
+                dispatch(userActions.logout());
+            }
+        });
+    }
+}
+
 // initial state
 
 const initialState = {};
@@ -133,24 +154,25 @@ function applyLikePhoto(state, action){
     return {...state, feed: updateFeed };
 }
 
-function applyUnlikePhoto(state, action){
+function applyUnlikePhoto(state, action) {
     const { photoId } = action;
     const { feed } = state;
-    const updateFeed = feed.map(photo => {
-        if(photo.id === photoId){
-            return {...photo, is_liked: false, like_count: photo.unlike_count - 1}
-        }
-        return photo;
+    const updatedFeed = feed.map(photo => {
+      if (photo.id === photoId) {
+        return { ...photo, is_liked: false, like_count: photo.like_count - 1 };
+      }
+      return photo;
     });
-    return {...state, feed: updateFeed };
-}
+    return { ...state, feed: updatedFeed };
+  }
 
 // exports
 
 const actionCreators = {
     getFeed,
     likePhoto,
-    unlikePhoto
+    unlikePhoto,
+    commentPhoto
 };
 
 export { actionCreators };
