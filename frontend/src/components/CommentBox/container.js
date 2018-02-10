@@ -20,9 +20,12 @@ class Container extends Component {
     });
   };
   _handleKeyPress = event => {
+    const { submitComment } = this.props;
+    const { comment } = this.state;
     const { key } = event;
     if (key === "Enter"){
       event.preventDefault();
+      submitComment(comment);
 
     }
     console.log(key);
