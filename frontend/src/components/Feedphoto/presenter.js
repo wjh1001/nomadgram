@@ -1,4 +1,3 @@
-
 import React from "react";
 import PropTypes from "prop-types";
 import styles from "./styles.scss";
@@ -38,20 +37,17 @@ const FeedPhoto = (props, context) => {
         <TimeStamp time={props.natural_time} />
         <CommentBox photoId={props.id} />
       </div>
-      {props.seeingLikes && (
-      <UserList title={context.t="Likes"} closeLikes={props.closeLikes}/>
-      )}
+      {props.seeingLikes && <UserList title={context.t("Likes")} />}
     </div>
   );
 };
-
 
 FeedPhoto.contextTypes = {
   t: PropTypes.func.isRequired
 };
 
-
 FeedPhoto.propTypes = {
+  id: PropTypes.number.isRequired,
   creator: PropTypes.shape({
     profile_image: PropTypes.string,
     username: PropTypes.string.isRequired
@@ -62,6 +58,7 @@ FeedPhoto.propTypes = {
   caption: PropTypes.string.isRequired,
   comments: PropTypes.arrayOf(
     PropTypes.shape({
+      id: PropTypes.number.isRequired,
       message: PropTypes.string.isRequired,
       creator: PropTypes.shape({
         profile_image: PropTypes.string,
@@ -72,9 +69,8 @@ FeedPhoto.propTypes = {
   natural_time: PropTypes.string.isRequired,
   is_liked: PropTypes.bool.isRequired,
   seeingLikes: PropTypes.bool.isRequired,
-  openLikes: PropTypes.func.is_liked,
+  openLikes: PropTypes.func.isRequired,
   closeLikes: PropTypes.func.isRequired
 };
-
 
 export default FeedPhoto;
