@@ -24,7 +24,7 @@ function logout() {
 
 function setUserList(userList){
   return {
-    type : SET_USER_LIST,
+    type: SET_USER_LIST,
     userList
   }
 }
@@ -99,24 +99,23 @@ function createAccount(username, password, email, name) {
   };
 }
 
-
 function getPhotoLikes(photoId){
   return (dispatch, getState) => {
-    const {user: { token }} = getState();
+    const { user: { token } } = getState();
     fetch(`/images/${photoId}/likes/`, {
-      headers: {
-        Authentication: `JWT ${token}`
+      headers:{
+        Authorization: `JWT ${token}`
       }
     })
-    .then(response => {
-      if(response.status === 401){
+    .then(response =>{
+      if (response.status === 401){
         dispatch(logout());
       }
       return response.json();
     })
     .then(json => {
       dispatch(setUserList(json));
-    })
+    });
   }
 }
 
@@ -167,7 +166,7 @@ function applySetUserList(state, action){
   return {
     ...state,
     userList
-  };
+  }
 }
 
 // exports
