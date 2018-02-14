@@ -3,19 +3,16 @@ import { actionCreators as userActions } from "redux/modules/user";
 import Container from "./container";
 
 const mapStateToProps = (state, ownProps) => {
-  const { user: { userList, imageList }, routing: { location } } = state;
+  const { user: { userList } } = state;
   return {
-    userList,
-    imageList,
-    location
+    userList
   };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  const { match: { params: { searchTerm } } } = ownProps;
   return {
-    searchByTerm: () => {
-      dispatch(userActions.searchByTerm(searchTerm));
+    getExplore: () => {
+      dispatch(userActions.getExplore());
     }
   };
 };
