@@ -8,7 +8,6 @@ const SET_FEED = "SET_FEED";
 const LIKE_PHOTO = "LIKE_PHOTO";
 const UNLIKE_PHOTO = "UNLIKE_PHOTO";
 const ADD_COMMENT = "ADD_COMMENT";
-const DELETE_COMMENT = "DELETE_COMMENT";
 
 // action creators
 
@@ -38,14 +37,6 @@ function addComment(photoId, comment) {
     type: ADD_COMMENT,
     photoId,
     comment
-  };
-}
-
-function removeComment(photoId, messageId) {
-  return {
-    type: DELETE_COMMENT,
-    photoId,
-    messageId
   };
 }
 
@@ -135,7 +126,6 @@ function commentPhoto(photoId, message) {
       });
   };
 }
-
 // Initial State
 
 const initialState = {};
@@ -205,7 +195,6 @@ function applyAddComment(state, action) {
   });
   return { ...state, feed: updatedFeed };
 }
-
 // Exports
 
 const actionCreators = {
