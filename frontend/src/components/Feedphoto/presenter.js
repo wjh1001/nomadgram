@@ -38,7 +38,11 @@ const FeedPhoto = (props, context) => {
         <CommentBox photoId={props.id} />
       </div>
       {props.seeingLikes && (
-        <UserList title={context.t("Likes")} closeLikes={props.closeLikes} />
+        <UserList
+          title={context.t("Likes")}
+          closeLikes={props.closeLikes}
+          userList={props.likes}
+        />
       )}
     </div>
   );
@@ -64,8 +68,7 @@ FeedPhoto.propTypes = {
       message: PropTypes.string.isRequired,
       creator: PropTypes.shape({
         profile_image: PropTypes.string,
-        username: PropTypes.string.isRequired,
-        name: PropTypes.string
+        username: PropTypes.string.isRequired
       }).isRequired
     })
   ).isRequired,
@@ -73,7 +76,14 @@ FeedPhoto.propTypes = {
   is_liked: PropTypes.bool.isRequired,
   seeingLikes: PropTypes.bool.isRequired,
   openLikes: PropTypes.func.isRequired,
-  closeLikes: PropTypes.func.isRequired
+  closeLikes: PropTypes.func.isRequired,
+  likes: PropTypes.arrayOf(
+    PropTypes.shape({
+      profile_image: PropTypes.string,
+      username: PropTypes.string.isRequired,
+      name: PropTypes.string
+    }).isRequired
+  )
 };
 
 export default FeedPhoto;

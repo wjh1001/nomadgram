@@ -5,6 +5,8 @@
 const SAVE_TOKEN = "SAVE_TOKEN";
 const LOGOUT = "LOGOUT";
 const SET_USER_LIST = "SET_USER_LIST";
+const FOLLOW_USER = "FOLLOW_USER";
+const UNFOLLOW_USER = "UNFOLLOW_USER";
 
 // action creators
 
@@ -116,6 +118,49 @@ function getPhotoLikes(photoId){
     .then(json => {
       dispatch(setUserList(json));
     });
+  }
+}
+
+
+function followUser(userId){
+  return (dispatch, setState) => {
+    dispatch(setFollowUser(userId));
+    const { user : { token } } = getState();
+    fetch(`/users/$(userId)/follow`, {
+      method: "POST",
+      headers: {
+        Authorization : `JWT ${token}`,
+        "Content-Type": "application/json"
+      }
+    })
+    .then(response => {
+      if(response.status === 401){
+        dispatch(logout())
+      } else if(!response.ok){
+        dispatch(setUnfollowUser(userId));
+      }
+    })
+  };
+}
+
+function unfollowUser(userId){
+  return (dispatch, setState) => {
+    dispatch(setUnfollowUser(userId));
+    const { user : { token } } = getState();
+    fetch(`/users/$(userId)/unfollow`, {
+      method: "POST",
+      headers: {
+        Authorization : `JWT ${token}`,
+        "Content-Type": "application/json"
+      }
+    })
+    .then(response => {
+      if(response.status === 401){
+        dispatch(logout())
+      } else if(!response.ok){
+        dispatch(setFollowUser(userId));
+      }
+    })
   }
 }
 
