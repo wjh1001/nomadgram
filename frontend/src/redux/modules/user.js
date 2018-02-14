@@ -185,7 +185,7 @@ function unfollowUser(userId) {
 function getExplore() {
   return (dispatch, getState) => {
     const { user: { token } } = getState();
-    fetch("/users/explore/", {
+    fetch(`/users/explore/`, {
       headers: {
         Authorization: `JWT ${token}`,
         "Content-Type": "application/json"
