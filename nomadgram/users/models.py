@@ -41,3 +41,15 @@ class User(AbstractUser):
     @property
     def following_count(self):
         return self.following.all().count()
+
+
+class Client(models.Model):
+    user = models.ForeignKey('User', models.DO_NOTHING, blank=True, null=True)
+    bio = models.CharField(max_length=500)
+
+    class Meta:
+        #managed = False
+        db_table = 'client'
+
+
+    

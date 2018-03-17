@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.conf import settings
 import os
 from django.conf.urls import url
-from rest_framework_swagger.views import get_swagger_view
+
 
 class ReactAppView(View):
 
@@ -23,8 +23,3 @@ class ReactAppView(View):
 
 
 
-schema_view = get_swagger_view(title='WoW API')
-
-urlpatterns = [
-    url(r'^swagger/', schema_view)
-]
