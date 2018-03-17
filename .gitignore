@@ -3,3 +3,9 @@ db.sqlite3
 media/
 *.pyc
 mydatabase
+
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

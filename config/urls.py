@@ -6,6 +6,10 @@ from django.views.generic import TemplateView
 from django.views import defaults as default_views
 from rest_framework_jwt.views import obtain_jwt_token
 from nomadgram import views
+from rest_framework_swagger.views import get_swagger_view
+from rest_framework.documentation import include_docs_urls
+
+schema_view = get_swagger_view(title='WoW API')
 
 urlpatterns = [
     # Django Admin, use {% url 'admin:index' %}
@@ -19,6 +23,9 @@ urlpatterns = [
     url(r'^notifications/',
         include('nomadgram.notifications.urls', namespace='notifications')),
     url(r'^accounts/', include('allauth.urls')),
+    url(r'^swagger/', schema_view),
+    url(r'^docs/', include_docs_urls(title="asdfasdf",authentication_classes=[],
+                                    permission_classes=[])),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
@@ -44,3 +51,5 @@ if settings.DEBUG:
         urlpatterns = [
             url(r'^__debug__/', include(debug_toolbar.urls)),
         ] + urlpatterns
+
+
