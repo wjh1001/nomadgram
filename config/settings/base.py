@@ -57,6 +57,7 @@ THIRD_PARTY_APPS = [
     'rest_auth', # rest auth
     'rest_auth.registration', #enabler registration auth registration
     'corsheaders', # To accept requests from React
+
 ]
 
 # Apps specific for this project go here.
@@ -65,6 +66,7 @@ LOCAL_APPS = [
     'nomadgram.users.apps.UsersConfig',
     'nomadgram.images.apps.ImagesConfig',
     'nomadgram.notifications.apps.NotificationsConfig', # Notifications
+    
 
     # Your stuff: custom apps go here
 ]
