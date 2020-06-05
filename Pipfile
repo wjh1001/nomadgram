@@ -12,7 +12,7 @@ name = "pypi"
 [packages]
 
 cookiecutter = "*"
-Django = "==1.11.8"
+Django = "==1.11.29"
 django-environ = "==0.4.4"
 django-crispy-forms = "==1.7.0"
 django-model-utils = "==3.0.0"
